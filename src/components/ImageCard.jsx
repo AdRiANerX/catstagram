@@ -12,7 +12,7 @@ function ImageCard({ data, selectCat }) {
   return (
     <div
       onClick={handleOnClick}
-      className="flex flex-row justify-center items-center text-center p-2 bg-white rounded-lg border border-pink-400 shadow-md "
+      className="flex flex-row justify-center items-center text-center p-2 bg-white rounded-lg border border-pink-400 shadow-md cursor-zoom-in"
     >
       <img src={data.url} alt={data.url} className="rounded-lg border" />
     </div>

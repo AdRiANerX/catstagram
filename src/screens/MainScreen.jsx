@@ -14,9 +14,7 @@ import {
 function MainScreen() {
   const { ref, inView, entry } = useInView({
     /* Optional options */
-    threshold: 0,
-    trackVisibility: true,
-    delay: 3000,
+    threshold: 0.1,
   });
   const [arrayImages, setArrayImages] = useState([]);
   const [breedStr, setBreedStr] = useState("");
@@ -49,15 +47,22 @@ function MainScreen() {
   }, [arrayImages]);
 
   useEffect(() => {
+    getRandomImages().then((resp) => {
+      setArrayImages([...arrayImages, ...resp]);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entry, inView]);
 
   return (
     <div className="relative bg-white">
-      <TopNavBar breedSelected={breedSelected} breeds={breeds} />
+      <TopNavBar
+        breedSelected={breedSelected}
+        breeds={breeds}
+        breedStr={breedStr}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sticky mt-3 mb-5">
-        <RandomBreeds breeds={breeds} />
+        <RandomBreeds breeds={breeds} breedSelected={breedSelected} />
 
         <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-3 grid-flow-row-dense">
           {arrayImages.map((img) => (
@@ -65,14 +70,14 @@ function MainScreen() {
           ))}
         </div>
 
-        {/* {breedStr === "" && arrayImages.length !== 0 && (
+        {breedStr === "" && (
           <div
             ref={ref}
             className="flex flex-row justify-center items-center text-center p-5 mt-5 bg-white rounded-lg border border-pink-400 shadow-md "
           >
             <h1>Cargando...</h1>
           </div>
-        )} */}
+        )}
       </div>
 
       <DetailsModal selectCat={selectCat} catSelected={catSelected} />

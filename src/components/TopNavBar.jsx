@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getBreeds } from "../services/thecatapi";
 
-function TopNavBar({ breedSelected, breeds = [] }) {
+function TopNavBar({ breedSelected, breeds = [], breedStr = "" }) {
   const handleInputChange = (event) => {
     breedSelected(event.target.value);
   };
@@ -23,6 +23,7 @@ function TopNavBar({ breedSelected, breeds = [] }) {
         <div className="py-4">
           <select
             onChange={(e) => handleInputChange(e)}
+            value={breedStr}
             className="w-full text-gray-900 text-bold text-base border-b-2 focus:outline-none"
           >
             <option className=" text-gray-400 " value="">
