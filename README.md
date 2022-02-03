@@ -1,3 +1,3 @@
-# React App Template With Eslint and Prettier
+# Catstragram Challenge
 
-- 02/02/2022
+- 03/02/2022
